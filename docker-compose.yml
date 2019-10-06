@@ -1,0 +1,33 @@
+version: '2'
+services:
+  seisankun_db:
+    build: ./docker/mysql
+    image: seisankun:0.0.1
+    restart: always
+    environment:
+      MYSQL_DATABASE: seisankun
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3314:3306"
+    volumes:
+      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+      - ./log/mysql:/var/log/mysql
+
+  app:
+    build: ./
+    image: seisankun/boot:0.0.1
+    depends_on:
+      - seisankun_db
+    ports:
+      - "8000:8080"
+    volumes:
+      - .:/app
+    environment:
+      WAIT_HOSTS: seisankun_db:3306
+
+volumes:
+  mysql-db:
+    driver: local
