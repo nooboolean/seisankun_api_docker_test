@@ -1,8 +1,9 @@
 version: '2'
 services:
-  seisankun_db:
+  seisankundb:
     build: ./docker/mysql
     image: seisankun:0.0.1
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     restart: always
     environment:
       MYSQL_DATABASE: seisankun
@@ -20,13 +21,13 @@ services:
     build: ./
     image: seisankun/boot:0.0.1
     depends_on:
-      - seisankun_db
+      - seisankundb
     ports:
       - "8000:8080"
     volumes:
       - .:/app
     environment:
-      WAIT_HOSTS: seisankun_db:3306
+      WAIT_HOSTS: seisankundb:3306
 
 volumes:
   mysql-db:

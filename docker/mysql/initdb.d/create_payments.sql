@@ -1,5 +1,5 @@
 CREATE TABLE payments (
-   id INT NOT NULL AUTO_INCREMENT
+   id INT NOT NULL AUTO_INCREMENT,
    travel_id INT NOT NULL,
    payer_id INT NOT NULL,
    amount INT NOT NULL,
@@ -7,8 +7,8 @@ CREATE TABLE payments (
    created_at DATETIME NOT NULL,
    updated_by INT NOT NULL,
    updated_at DATETIME NOT NULL,
-   deleted_by INT NOT NULL,
-   deleted_at DATETIME NOT NULL,
-   delete_flag TINYNINT,
+   deleted_by INT,
+   deleted_at DATETIME,
+   delete_flag TINYINT,
    PRIMARY KEY (id)
 );
