@@ -8,8 +8,8 @@ CREATE TABLE users (
    created_at DATETIME NOT NULL,
    updated_by INT NOT NULL,
    updated_at DATETIME NOT NULL,
-   deleted_by INT NOT NULL,
-   deleted_at DATETIME NOT NULL,
-   delete_flag TINYNINT,
+   deleted_by INT,
+   deleted_at DATETIME,
+   delete_flag TINYINT,
    PRIMARY KEY (uid)
 );
